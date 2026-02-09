@@ -80,39 +80,39 @@ prisma/
 - [x] **1.3** Installer Prisma + configurer connexion Neon PostgreSQL
 - [x] **1.4** Ecrire schema.prisma (enums GameStatus, Platform + model Game)
 - [x] **1.5** Executer `prisma migrate dev` (migration init)
-- [ ] **1.6** Creer `src/lib/prisma.ts` (client singleton)
+- [x] **1.6** Creer `src/lib/prisma.ts` (client singleton avec adapter Neon)
 - [x] **1.7** Installer + configurer Clerk (env vars, ClerkProvider frFR)
 - [ ] **1.8** Commit : "feat: setup projet + prisma + clerk"
 
 ### BLOC 2 -- Authentification Clerk (0:30 - 1:00) [15 pts]
 
-- [x] **2.1** Configurer `proxy.ts` (middleware Clerk) -- MANQUE: protection routes /dashboard
-- [ ] **2.2** Creer page `/sign-in/[[...sign-in]]/page.tsx`
-- [ ] **2.3** Creer page `/sign-up/[[...sign-up]]/page.tsx`
+- [x] **2.1** Configurer `proxy.ts` (middleware Clerk) avec protection routes /dashboard
+- [x] **2.2** Creer page `/sign-in/[[...sign-in]]/page.tsx`
+- [x] **2.3** Creer page `/sign-up/[[...sign-up]]/page.tsx`
 - [x] **2.4** Layout global : ClerkProvider avec localisation frFR
-- [ ] **2.5** Navbar : SignedIn, SignedOut, UserButton, liens navigation
-- [ ] **2.6** Verifier : routes protegees redirigent bien vers sign-in
+- [x] **2.5** Navbar : SignedIn, SignedOut, UserButton, liens navigation
+- [x] **2.6** Verifier : routes protegees redirigent bien vers sign-in
 - [ ] **2.7** Commit : "feat: authentification Clerk complete"
 
 ### BLOC 3 -- Server Actions CRUD (1:00 - 1:45) [23 pts]
 
-- [ ] **3.1** `addGame(data)` -- avec auth(), validation, revalidatePath
-- [ ] **3.2** `getUserGames()` -- avec auth(), filtre userId
-- [ ] **3.3** `updateGame(gameId, data)` -- avec auth(), verif ownership
-- [ ] **3.4** `deleteGame(gameId)` -- avec auth(), verif ownership
-- [ ] **3.5** `getPublicGames()` -- sans auth, filtre isPublic
-- [ ] **3.6** Formulaire d'ajout `/dashboard/add` avec validation client
+- [x] **3.1** `addGame(data)` -- avec auth(), validation, revalidatePath
+- [x] **3.2** `getUserGames()` -- avec auth(), filtre userId
+- [x] **3.3** `updateGame(gameId, data)` -- avec auth(), verif ownership
+- [x] **3.4** `deleteGame(gameId)` -- avec auth(), verif ownership
+- [x] **3.5** `getPublicGames()` -- sans auth, filtre isPublic + filtres plateforme/statut
+- [x] **3.6** Formulaire d'ajout `/dashboard/add` avec validation client
 - [ ] **3.7** Tester toutes les actions (ajout, modif, suppression)
 - [ ] **3.8** Commit : "feat: server actions CRUD completes"
 
 ### BLOC 4 -- Interface utilisateur (1:45 - 2:30) [27 pts]
 
 - [ ] **4.1** Page d'accueil `/` -- hero, CTA vers dashboard/explore
-- [ ] **4.2** Dashboard `/dashboard` -- liste des jeux avec GameCard
-- [ ] **4.3** GameCard -- affichage titre, plateforme, statut, note, actions (modifier statut, supprimer)
-- [ ] **4.4** Statistiques dashboard : total jeux, repartition statut, note moyenne, plateforme top
-- [ ] **4.5** StatsCards -- cartes visuelles Tailwind
-- [ ] **4.6** Page `/explore` -- jeux publics avec filtres (plateforme, statut)
+- [x] **4.2** Dashboard `/dashboard` -- liste des jeux avec actions
+- [x] **4.3** GameCard -- affichage titre, plateforme, statut, note, modifier statut, supprimer
+- [x] **4.4** Statistiques dashboard : total jeux, repartition statut, note moyenne, plateforme top
+- [x] **4.5** StatsCards -- cartes visuelles Tailwind
+- [x] **4.6** Page `/explore` -- jeux publics avec filtres (plateforme, statut)
 - [ ] **4.7** Feedback visuel : loading states, confirmations suppression
 - [ ] **4.8** Commit : "feat: interface utilisateur complete"
 
@@ -137,13 +137,13 @@ prisma/
 
 | Bloc | Statut | Progression |
 |------|--------|-------------|
-| BLOC 1 - Setup | EN COURS | 75% |
-| BLOC 2 - Auth | EN COURS | 30% |
-| BLOC 3 - CRUD | EN ATTENTE | 0% |
-| BLOC 4 - UI | EN ATTENTE | 0% |
+| BLOC 1 - Setup | TERMINE | 100% |
+| BLOC 2 - Auth | TERMINE | 95% |
+| BLOC 3 - CRUD | EN COURS | 80% |
+| BLOC 4 - UI | EN COURS | 70% |
 | BLOC 5 - Polish | EN ATTENTE | 0% |
 | BLOC 6 - Final | EN ATTENTE | 0% |
-| **TOTAL** | **EN COURS** | **~18%** |
+| **TOTAL** | **EN COURS** | **~65%** |
 
 ---
 

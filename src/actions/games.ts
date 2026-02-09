@@ -97,15 +97,37 @@ export async function deleteGame(gameId:number) {
     revalidatePath("/dashboard")
 }
 
-// recuperer les jeux publics
+// recuperer les jeux publics (avec filtres optionnels)
 
-export async function getPublicGames(){
+export async function getPublicGames(filters?: {
+    platform?: string
+    status?: string
+}){
     return await prisma.game.findMany({
         where:{
-            isPublic:true
+            isPublic:true,
+            ...(filters?.platform ? { platform: filters.platform as Platform } : {}),
+            ...(filters?.status ? { status: filters.status as GameStatus } : {}),
         },
         orderBy:{
             createdAt:"desc"
         }
     })
+}
+
+
+// rechercher des jeux via RAWG API
+
+export async function searchGamesRAWG(query:string){
+    if (!query || query.length < 2) return [];
+
+    const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${encodeURIComponent(query)}&page_size=5`);
+    
+    const data = await res.json();
+
+    return (data.results ?? []).map((g:any) => ({
+        title:g.name,
+        platform:g.platforms?.map((p:any) => p.platform.name)??[],
+        imageUrl:g.background_image ?? "",
+    }))
 }
