@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GameVault
 
-## Getting Started
+Application web pour gerer sa collection de jeux video et decouvrir celles des autres joueurs.
 
-First, run the development server:
+## Stack technique
+
+- Next.js 16 (App Router)
+- TypeScript
+- Prisma 7 + Neon PostgreSQL
+- Clerk (authentification)
+- Tailwind CSS
+- RAWG.io API (recherche de jeux)
+
+## Installation
 
 ```bash
+# cloner le repo
+git clone https://github.com/sam87999/service-web-devoir-gamevault.git
+cd devoir_bonus
+
+# installer les dependances
+npm install
+
+# generer le client prisma
+npx prisma generate
+
+# appliquer les migrations
+npx prisma migrate dev
+
+# lancer le serveur de dev
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+L'app sera disponible sur `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Configuration .env
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Creer un fichier `.env` a la racine du projet avec les cles suivantes :
 
-## Learn More
+```env
+# Base de donnees Neon PostgreSQL
+DATABASE_URL="postgresql://..."
 
-To learn more about Next.js, take a look at the following resources:
+# Clerk (authentification)
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
+CLERK_SECRET_KEY=sk_test_...
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# RAWG.io API (recherche de jeux)
+RAWG_API_KEY=...
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **DATABASE_URL** : URL de connexion a la base Neon (disponible dans le dashboard Neon)
+- **Clerk** : Cles disponibles dans le dashboard Clerk (clerk.com)
+- **RAWG_API_KEY** : Cle API gratuite depuis rawg.io/apidocs
 
-## Deploy on Vercel
+## Fonctionnalites
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Inscription / connexion avec Clerk
+- Ajouter, modifier et supprimer des jeux dans sa collection
+- Recherche de jeux via l'API RAWG avec auto-completion
+- Dashboard avec statistiques (total jeux, note moyenne, plateforme top, etc.)
+- Page explore pour voir les collections publiques avec filtres (plateforme, statut)
